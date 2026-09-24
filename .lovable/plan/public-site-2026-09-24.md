@@ -1,4 +1,4 @@
-# Fashion Design & Customization Platform
+Fashion Design & Customization Platform
 
 A complete, lightweight fashion platform with three roles — Owner/Admin, Designer, Customer — built as a fast web app with a built-in cloud database. No 3D, no WebGL, no heavy libraries: 2D layered previews, CSS transitions and soft hover effects only.
 
@@ -37,6 +37,7 @@ Selecting a dress opens a customization page with:
 ### Booking and tracking
 
 - Pay the booking fee by UPI (deep link on mobile, QR on desktop), then confirm; order appears in My Orders with a tracking ID.
+- Options to cancel the booking but a warning that it's not refundable if it's a booking for stitching since the half way work will be done after started stitching 
 - Timeline tracker: Order Confirmed → Measurements Received → Design Confirmed → Stitching Started → Stitching Completed → Quality Check → Packed → Out for Delivery → Delivered. Updates from the owner appear automatically.
 
 ## Designer dashboard
