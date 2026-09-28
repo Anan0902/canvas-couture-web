@@ -10,14 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as DressesRouteImport } from './routes/dresses'
 import { Route as FabricsRouteImport } from './routes/fabrics'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as OwnerLoginRouteImport } from './routes/owner-login'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as AuthenticatedCustomizeIdRouteImport } from './routes/_authenticated/customize.$id'
+import { Route as AuthenticatedOrdersIdRouteImport } from './routes/_authenticated/orders.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
@@ -35,10 +44,31 @@ const FabricsRoute = FabricsRouteImport.update({
   path: '/fabrics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerLoginRoute = OwnerLoginRouteImport.update({
+  id: '/owner-login',
+  path: '/owner-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedCustomizeIdRoute =
+  AuthenticatedCustomizeIdRouteImport.update({
+    id: '/customize/$id',
+    path: '/customize/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedOrdersIdRoute = AuthenticatedOrdersIdRouteImport.update({
+  id: '/orders/$id',
+  path: '/orders/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -46,36 +76,81 @@ export interface FileRoutesByFullPath {
   '/accessories': typeof AccessoriesRoute
   '/dresses': typeof DressesRoute
   '/fabrics': typeof FabricsRoute
+  '/login': typeof LoginRoute
+  '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
+  '/customize/$id': typeof AuthenticatedCustomizeIdRoute
+  '/orders/$id': typeof AuthenticatedOrdersIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/dresses': typeof DressesRoute
   '/fabrics': typeof FabricsRoute
+  '/login': typeof LoginRoute
+  '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
+  '/customize/$id': typeof AuthenticatedCustomizeIdRoute
+  '/orders/$id': typeof AuthenticatedOrdersIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/accessories': typeof AccessoriesRoute
   '/dresses': typeof DressesRoute
   '/fabrics': typeof FabricsRoute
+  '/login': typeof LoginRoute
+  '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
+  '/_authenticated/customize/$id': typeof AuthenticatedCustomizeIdRoute
+  '/_authenticated/orders/$id': typeof AuthenticatedOrdersIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/accessories' | '/dresses' | '/fabrics' | '/search'
+  fullPaths:
+    | '/'
+    | '/accessories'
+    | '/dresses'
+    | '/fabrics'
+    | '/login'
+    | '/owner-login'
+    | '/search'
+    | '/customize/$id'
+    | '/orders/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accessories' | '/dresses' | '/fabrics' | '/search'
-  id: '__root__' | '/' | '/accessories' | '/dresses' | '/fabrics' | '/search'
+  to:
+    | '/'
+    | '/accessories'
+    | '/dresses'
+    | '/fabrics'
+    | '/login'
+    | '/owner-login'
+    | '/search'
+    | '/customize/$id'
+    | '/orders/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/accessories'
+    | '/dresses'
+    | '/fabrics'
+    | '/login'
+    | '/owner-login'
+    | '/search'
+    | '/_authenticated/customize/$id'
+    | '/_authenticated/orders/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AccessoriesRoute: typeof AccessoriesRoute
   DressesRoute: typeof DressesRoute
   FabricsRoute: typeof FabricsRoute
+  LoginRoute: typeof LoginRoute
+  OwnerLoginRoute: typeof OwnerLoginRoute
   SearchRoute: typeof SearchRoute
 }
 
@@ -86,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accessories': {
@@ -109,6 +191,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FabricsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner-login': {
+      id: '/owner-login'
+      path: '/owner-login'
+      fullPath: '/owner-login'
+      preLoaderRoute: typeof OwnerLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -116,14 +212,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/customize/$id': {
+      id: '/_authenticated/customize/$id'
+      path: '/customize/$id'
+      fullPath: '/customize/$id'
+      preLoaderRoute: typeof AuthenticatedCustomizeIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/orders/$id': {
+      id: '/_authenticated/orders/$id'
+      path: '/orders/$id'
+      fullPath: '/orders/$id'
+      preLoaderRoute: typeof AuthenticatedOrdersIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCustomizeIdRoute: typeof AuthenticatedCustomizeIdRoute
+  AuthenticatedOrdersIdRoute: typeof AuthenticatedOrdersIdRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCustomizeIdRoute: AuthenticatedCustomizeIdRoute,
+  AuthenticatedOrdersIdRoute: AuthenticatedOrdersIdRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AccessoriesRoute: AccessoriesRoute,
   DressesRoute: DressesRoute,
   FabricsRoute: FabricsRoute,
+  LoginRoute: LoginRoute,
+  OwnerLoginRoute: OwnerLoginRoute,
   SearchRoute: SearchRoute,
 }
 export const routeTree = rootRouteImport
