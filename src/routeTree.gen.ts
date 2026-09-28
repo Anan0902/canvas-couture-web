@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as DressesRouteImport } from './routes/dresses'
 import { Route as FabricsRouteImport } from './routes/fabrics'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as OwnerLoginRouteImport } from './routes/owner-login'
 import { Route as SearchRouteImport } from './routes/search'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +37,16 @@ const FabricsRoute = FabricsRouteImport.update({
   path: '/fabrics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerLoginRoute = OwnerLoginRouteImport.update({
+  id: '/owner-login',
+  path: '/owner-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -46,6 +58,8 @@ export interface FileRoutesByFullPath {
   '/accessories': typeof AccessoriesRoute
   '/dresses': typeof DressesRoute
   '/fabrics': typeof FabricsRoute
+  '/login': typeof LoginRoute
+  '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +67,8 @@ export interface FileRoutesByTo {
   '/accessories': typeof AccessoriesRoute
   '/dresses': typeof DressesRoute
   '/fabrics': typeof FabricsRoute
+  '/login': typeof LoginRoute
+  '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
 }
 export interface FileRoutesById {
@@ -61,14 +77,38 @@ export interface FileRoutesById {
   '/accessories': typeof AccessoriesRoute
   '/dresses': typeof DressesRoute
   '/fabrics': typeof FabricsRoute
+  '/login': typeof LoginRoute
+  '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/accessories' | '/dresses' | '/fabrics' | '/search'
+  fullPaths:
+    | '/'
+    | '/accessories'
+    | '/dresses'
+    | '/fabrics'
+    | '/login'
+    | '/owner-login'
+    | '/search'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accessories' | '/dresses' | '/fabrics' | '/search'
-  id: '__root__' | '/' | '/accessories' | '/dresses' | '/fabrics' | '/search'
+  to:
+    | '/'
+    | '/accessories'
+    | '/dresses'
+    | '/fabrics'
+    | '/login'
+    | '/owner-login'
+    | '/search'
+  id:
+    | '__root__'
+    | '/'
+    | '/accessories'
+    | '/dresses'
+    | '/fabrics'
+    | '/login'
+    | '/owner-login'
+    | '/search'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +116,8 @@ export interface RootRouteChildren {
   AccessoriesRoute: typeof AccessoriesRoute
   DressesRoute: typeof DressesRoute
   FabricsRoute: typeof FabricsRoute
+  LoginRoute: typeof LoginRoute
+  OwnerLoginRoute: typeof OwnerLoginRoute
   SearchRoute: typeof SearchRoute
 }
 
@@ -109,6 +151,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FabricsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner-login': {
+      id: '/owner-login'
+      path: '/owner-login'
+      fullPath: '/owner-login'
+      preLoaderRoute: typeof OwnerLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -124,6 +180,8 @@ const rootRouteChildren: RootRouteChildren = {
   AccessoriesRoute: AccessoriesRoute,
   DressesRoute: DressesRoute,
   FabricsRoute: FabricsRoute,
+  LoginRoute: LoginRoute,
+  OwnerLoginRoute: OwnerLoginRoute,
   SearchRoute: SearchRoute,
 }
 export const routeTree = rootRouteImport
