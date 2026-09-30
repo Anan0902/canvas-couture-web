@@ -19,6 +19,7 @@ import { Route as OwnerLoginRouteImport } from './routes/owner-login'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AuthenticatedCustomerRouteImport } from './routes/_authenticated/customer'
 import { Route as AuthenticatedDesignerRouteImport } from './routes/_authenticated/designer'
+import { Route as AuthenticatedOwnerRouteImport } from './routes/_authenticated/owner'
 import { Route as AuthenticatedCustomerIndexRouteImport } from './routes/_authenticated/customer.index'
 import { Route as AuthenticatedCustomerHelpRouteImport } from './routes/_authenticated/customer.help'
 import { Route as AuthenticatedCustomerOrdersRouteImport } from './routes/_authenticated/customer.orders'
@@ -33,6 +34,14 @@ import { Route as AuthenticatedDesignerOrdersRouteImport } from './routes/_authe
 import { Route as AuthenticatedDesignerProfileRouteImport } from './routes/_authenticated/designer.profile'
 import { Route as AuthenticatedDesignerSearchRouteImport } from './routes/_authenticated/designer.search'
 import { Route as AuthenticatedOrdersIdRouteImport } from './routes/_authenticated/orders.$id'
+import { Route as AuthenticatedOwnerIndexRouteImport } from './routes/_authenticated/owner.index'
+import { Route as AuthenticatedOwnerBookingsRouteImport } from './routes/_authenticated/owner.bookings'
+import { Route as AuthenticatedOwnerOptionsRouteImport } from './routes/_authenticated/owner.options'
+import { Route as AuthenticatedOwnerOrdersRouteImport } from './routes/_authenticated/owner.orders'
+import { Route as AuthenticatedOwnerPeopleRouteImport } from './routes/_authenticated/owner.people'
+import { Route as AuthenticatedOwnerProfileRouteImport } from './routes/_authenticated/owner.profile'
+import { Route as AuthenticatedOwnerStatsRouteImport } from './routes/_authenticated/owner.stats'
+import { Route as AuthenticatedOwnerProductsIdRouteImport } from './routes/_authenticated/owner.products.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -81,6 +90,11 @@ const AuthenticatedCustomerRoute = AuthenticatedCustomerRouteImport.update({
 const AuthenticatedDesignerRoute = AuthenticatedDesignerRouteImport.update({
   id: '/designer',
   path: '/designer',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOwnerRoute = AuthenticatedOwnerRouteImport.update({
+  id: '/owner',
+  path: '/owner',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCustomerIndexRoute =
@@ -166,6 +180,52 @@ const AuthenticatedOrdersIdRoute = AuthenticatedOrdersIdRouteImport.update({
   path: '/orders/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedOwnerIndexRoute = AuthenticatedOwnerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedOwnerRoute,
+} as any)
+const AuthenticatedOwnerBookingsRoute =
+  AuthenticatedOwnerBookingsRouteImport.update({
+    id: '/bookings',
+    path: '/bookings',
+    getParentRoute: () => AuthenticatedOwnerRoute,
+  } as any)
+const AuthenticatedOwnerOptionsRoute =
+  AuthenticatedOwnerOptionsRouteImport.update({
+    id: '/options',
+    path: '/options',
+    getParentRoute: () => AuthenticatedOwnerRoute,
+  } as any)
+const AuthenticatedOwnerOrdersRoute =
+  AuthenticatedOwnerOrdersRouteImport.update({
+    id: '/orders',
+    path: '/orders',
+    getParentRoute: () => AuthenticatedOwnerRoute,
+  } as any)
+const AuthenticatedOwnerPeopleRoute =
+  AuthenticatedOwnerPeopleRouteImport.update({
+    id: '/people',
+    path: '/people',
+    getParentRoute: () => AuthenticatedOwnerRoute,
+  } as any)
+const AuthenticatedOwnerProfileRoute =
+  AuthenticatedOwnerProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedOwnerRoute,
+  } as any)
+const AuthenticatedOwnerStatsRoute = AuthenticatedOwnerStatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => AuthenticatedOwnerRoute,
+} as any)
+const AuthenticatedOwnerProductsIdRoute =
+  AuthenticatedOwnerProductsIdRouteImport.update({
+    id: '/products/$id',
+    path: '/products/$id',
+    getParentRoute: () => AuthenticatedOwnerRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -177,6 +237,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/customer': typeof AuthenticatedCustomerRouteWithChildren
   '/designer': typeof AuthenticatedDesignerRouteWithChildren
+  '/owner': typeof AuthenticatedOwnerRouteWithChildren
   '/customer/help': typeof AuthenticatedCustomerHelpRoute
   '/customer/orders': typeof AuthenticatedCustomerOrdersRoute
   '/customer/profile': typeof AuthenticatedCustomerProfileRoute
@@ -189,8 +250,16 @@ export interface FileRoutesByFullPath {
   '/designer/profile': typeof AuthenticatedDesignerProfileRoute
   '/designer/search': typeof AuthenticatedDesignerSearchRoute
   '/orders/$id': typeof AuthenticatedOrdersIdRoute
+  '/owner/bookings': typeof AuthenticatedOwnerBookingsRoute
+  '/owner/options': typeof AuthenticatedOwnerOptionsRoute
+  '/owner/orders': typeof AuthenticatedOwnerOrdersRoute
+  '/owner/people': typeof AuthenticatedOwnerPeopleRoute
+  '/owner/profile': typeof AuthenticatedOwnerProfileRoute
+  '/owner/stats': typeof AuthenticatedOwnerStatsRoute
   '/customer/': typeof AuthenticatedCustomerIndexRoute
   '/designer/': typeof AuthenticatedDesignerIndexRoute
+  '/owner/': typeof AuthenticatedOwnerIndexRoute
+  '/owner/products/$id': typeof AuthenticatedOwnerProductsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -212,8 +281,16 @@ export interface FileRoutesByTo {
   '/designer/profile': typeof AuthenticatedDesignerProfileRoute
   '/designer/search': typeof AuthenticatedDesignerSearchRoute
   '/orders/$id': typeof AuthenticatedOrdersIdRoute
+  '/owner/bookings': typeof AuthenticatedOwnerBookingsRoute
+  '/owner/options': typeof AuthenticatedOwnerOptionsRoute
+  '/owner/orders': typeof AuthenticatedOwnerOrdersRoute
+  '/owner/people': typeof AuthenticatedOwnerPeopleRoute
+  '/owner/profile': typeof AuthenticatedOwnerProfileRoute
+  '/owner/stats': typeof AuthenticatedOwnerStatsRoute
   '/customer': typeof AuthenticatedCustomerIndexRoute
   '/designer': typeof AuthenticatedDesignerIndexRoute
+  '/owner': typeof AuthenticatedOwnerIndexRoute
+  '/owner/products/$id': typeof AuthenticatedOwnerProductsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -227,6 +304,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/_authenticated/customer': typeof AuthenticatedCustomerRouteWithChildren
   '/_authenticated/designer': typeof AuthenticatedDesignerRouteWithChildren
+  '/_authenticated/owner': typeof AuthenticatedOwnerRouteWithChildren
   '/_authenticated/customer/help': typeof AuthenticatedCustomerHelpRoute
   '/_authenticated/customer/orders': typeof AuthenticatedCustomerOrdersRoute
   '/_authenticated/customer/profile': typeof AuthenticatedCustomerProfileRoute
@@ -239,8 +317,16 @@ export interface FileRoutesById {
   '/_authenticated/designer/profile': typeof AuthenticatedDesignerProfileRoute
   '/_authenticated/designer/search': typeof AuthenticatedDesignerSearchRoute
   '/_authenticated/orders/$id': typeof AuthenticatedOrdersIdRoute
+  '/_authenticated/owner/bookings': typeof AuthenticatedOwnerBookingsRoute
+  '/_authenticated/owner/options': typeof AuthenticatedOwnerOptionsRoute
+  '/_authenticated/owner/orders': typeof AuthenticatedOwnerOrdersRoute
+  '/_authenticated/owner/people': typeof AuthenticatedOwnerPeopleRoute
+  '/_authenticated/owner/profile': typeof AuthenticatedOwnerProfileRoute
+  '/_authenticated/owner/stats': typeof AuthenticatedOwnerStatsRoute
   '/_authenticated/customer/': typeof AuthenticatedCustomerIndexRoute
   '/_authenticated/designer/': typeof AuthenticatedDesignerIndexRoute
+  '/_authenticated/owner/': typeof AuthenticatedOwnerIndexRoute
+  '/_authenticated/owner/products/$id': typeof AuthenticatedOwnerProductsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -254,6 +340,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/customer'
     | '/designer'
+    | '/owner'
     | '/customer/help'
     | '/customer/orders'
     | '/customer/profile'
@@ -266,8 +353,16 @@ export interface FileRouteTypes {
     | '/designer/profile'
     | '/designer/search'
     | '/orders/$id'
+    | '/owner/bookings'
+    | '/owner/options'
+    | '/owner/orders'
+    | '/owner/people'
+    | '/owner/profile'
+    | '/owner/stats'
     | '/customer/'
     | '/designer/'
+    | '/owner/'
+    | '/owner/products/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -289,8 +384,16 @@ export interface FileRouteTypes {
     | '/designer/profile'
     | '/designer/search'
     | '/orders/$id'
+    | '/owner/bookings'
+    | '/owner/options'
+    | '/owner/orders'
+    | '/owner/people'
+    | '/owner/profile'
+    | '/owner/stats'
     | '/customer'
     | '/designer'
+    | '/owner'
+    | '/owner/products/$id'
   id:
     | '__root__'
     | '/'
@@ -303,6 +406,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/_authenticated/customer'
     | '/_authenticated/designer'
+    | '/_authenticated/owner'
     | '/_authenticated/customer/help'
     | '/_authenticated/customer/orders'
     | '/_authenticated/customer/profile'
@@ -315,8 +419,16 @@ export interface FileRouteTypes {
     | '/_authenticated/designer/profile'
     | '/_authenticated/designer/search'
     | '/_authenticated/orders/$id'
+    | '/_authenticated/owner/bookings'
+    | '/_authenticated/owner/options'
+    | '/_authenticated/owner/orders'
+    | '/_authenticated/owner/people'
+    | '/_authenticated/owner/profile'
+    | '/_authenticated/owner/stats'
     | '/_authenticated/customer/'
     | '/_authenticated/designer/'
+    | '/_authenticated/owner/'
+    | '/_authenticated/owner/products/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -400,6 +512,13 @@ declare module '@tanstack/react-router' {
       path: '/designer'
       fullPath: '/designer'
       preLoaderRoute: typeof AuthenticatedDesignerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/owner': {
+      id: '/_authenticated/owner'
+      path: '/owner'
+      fullPath: '/owner'
+      preLoaderRoute: typeof AuthenticatedOwnerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/customer/': {
@@ -500,6 +619,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOrdersIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/owner/': {
+      id: '/_authenticated/owner/'
+      path: '/'
+      fullPath: '/owner/'
+      preLoaderRoute: typeof AuthenticatedOwnerIndexRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/bookings': {
+      id: '/_authenticated/owner/bookings'
+      path: '/bookings'
+      fullPath: '/owner/bookings'
+      preLoaderRoute: typeof AuthenticatedOwnerBookingsRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/options': {
+      id: '/_authenticated/owner/options'
+      path: '/options'
+      fullPath: '/owner/options'
+      preLoaderRoute: typeof AuthenticatedOwnerOptionsRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/orders': {
+      id: '/_authenticated/owner/orders'
+      path: '/orders'
+      fullPath: '/owner/orders'
+      preLoaderRoute: typeof AuthenticatedOwnerOrdersRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/people': {
+      id: '/_authenticated/owner/people'
+      path: '/people'
+      fullPath: '/owner/people'
+      preLoaderRoute: typeof AuthenticatedOwnerPeopleRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/profile': {
+      id: '/_authenticated/owner/profile'
+      path: '/profile'
+      fullPath: '/owner/profile'
+      preLoaderRoute: typeof AuthenticatedOwnerProfileRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/stats': {
+      id: '/_authenticated/owner/stats'
+      path: '/stats'
+      fullPath: '/owner/stats'
+      preLoaderRoute: typeof AuthenticatedOwnerStatsRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
+    '/_authenticated/owner/products/$id': {
+      id: '/_authenticated/owner/products/$id'
+      path: '/products/$id'
+      fullPath: '/owner/products/$id'
+      preLoaderRoute: typeof AuthenticatedOwnerProductsIdRouteImport
+      parentRoute: typeof AuthenticatedOwnerRoute
+    }
   }
 }
 
@@ -549,9 +724,35 @@ const AuthenticatedDesignerRouteWithChildren =
     AuthenticatedDesignerRouteChildren,
   )
 
+interface AuthenticatedOwnerRouteChildren {
+  AuthenticatedOwnerBookingsRoute: typeof AuthenticatedOwnerBookingsRoute
+  AuthenticatedOwnerOptionsRoute: typeof AuthenticatedOwnerOptionsRoute
+  AuthenticatedOwnerOrdersRoute: typeof AuthenticatedOwnerOrdersRoute
+  AuthenticatedOwnerPeopleRoute: typeof AuthenticatedOwnerPeopleRoute
+  AuthenticatedOwnerProfileRoute: typeof AuthenticatedOwnerProfileRoute
+  AuthenticatedOwnerStatsRoute: typeof AuthenticatedOwnerStatsRoute
+  AuthenticatedOwnerIndexRoute: typeof AuthenticatedOwnerIndexRoute
+  AuthenticatedOwnerProductsIdRoute: typeof AuthenticatedOwnerProductsIdRoute
+}
+
+const AuthenticatedOwnerRouteChildren: AuthenticatedOwnerRouteChildren = {
+  AuthenticatedOwnerBookingsRoute: AuthenticatedOwnerBookingsRoute,
+  AuthenticatedOwnerOptionsRoute: AuthenticatedOwnerOptionsRoute,
+  AuthenticatedOwnerOrdersRoute: AuthenticatedOwnerOrdersRoute,
+  AuthenticatedOwnerPeopleRoute: AuthenticatedOwnerPeopleRoute,
+  AuthenticatedOwnerProfileRoute: AuthenticatedOwnerProfileRoute,
+  AuthenticatedOwnerStatsRoute: AuthenticatedOwnerStatsRoute,
+  AuthenticatedOwnerIndexRoute: AuthenticatedOwnerIndexRoute,
+  AuthenticatedOwnerProductsIdRoute: AuthenticatedOwnerProductsIdRoute,
+}
+
+const AuthenticatedOwnerRouteWithChildren =
+  AuthenticatedOwnerRoute._addFileChildren(AuthenticatedOwnerRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCustomerRoute: typeof AuthenticatedCustomerRouteWithChildren
   AuthenticatedDesignerRoute: typeof AuthenticatedDesignerRouteWithChildren
+  AuthenticatedOwnerRoute: typeof AuthenticatedOwnerRouteWithChildren
   AuthenticatedCustomizeIdRoute: typeof AuthenticatedCustomizeIdRoute
   AuthenticatedOrdersIdRoute: typeof AuthenticatedOrdersIdRoute
 }
@@ -559,6 +760,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCustomerRoute: AuthenticatedCustomerRouteWithChildren,
   AuthenticatedDesignerRoute: AuthenticatedDesignerRouteWithChildren,
+  AuthenticatedOwnerRoute: AuthenticatedOwnerRouteWithChildren,
   AuthenticatedCustomizeIdRoute: AuthenticatedCustomizeIdRoute,
   AuthenticatedOrdersIdRoute: AuthenticatedOrdersIdRoute,
 }
