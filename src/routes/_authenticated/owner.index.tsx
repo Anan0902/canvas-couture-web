@@ -26,7 +26,7 @@ function OwnerHome() {
   const refresh = () => qc.invalidateQueries({ queryKey: ["products"] });
 
   async function patch(p: Product, v: Partial<Product>) {
-    const { error } = await supabase.from("products").update(v).eq("id", p.id);
+    const { error } = await supabase.from("products").update(v as any).eq("id", p.id);
     if (error) return toast.error(error.message);
     refresh();
   }
