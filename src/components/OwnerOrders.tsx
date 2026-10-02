@@ -14,7 +14,7 @@ export function OwnerOrders({ kind }: { kind?: "dress" }) {
   const list = data.filter((o) => (who === "all" || o.buyer_role === who) && (!kind || o.order_kind === kind));
 
   async function update(o: Order, v: Partial<Order>) {
-    const { error } = await supabase.from("orders").update(v).eq("id", o.id);
+    const { error } = await supabase.from("orders").update(v as any).eq("id", o.id);
     if (error) return toast.error(error.message);
     if (v.status) await supabase.from("order_status_history").insert({ order_id: o.id, status: v.status });
     toast.success("Updated");

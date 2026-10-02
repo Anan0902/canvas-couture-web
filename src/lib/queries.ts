@@ -13,7 +13,7 @@ export async function fetchProducts(filters?: {
   let q = supabase.from("products").select("*").order("created_at", { ascending: false });
   if (filters?.kind) q = q.eq("kind", filters.kind);
   if (filters?.audience) q = q.in("audience", [filters.audience, "all"]);
-  return unwrap<Product[]>(await q);
+  return unwrap<Product[]>((await q) as any);
 }
 
 export async function fetchProduct(id: string): Promise<Product | null> {
@@ -59,7 +59,7 @@ export async function fetchCategories(): Promise<NamedRow[]> {
 export async function fetchOrders(userId?: string): Promise<Order[]> {
   let q = supabase.from("orders").select("*").order("created_at", { ascending: false });
   if (userId) q = q.eq("user_id", userId);
-  return unwrap<Order[]>(await q);
+  return unwrap<Order[]>((await q) as any);
 }
 
 export async function fetchOrder(id: string): Promise<Order | null> {
