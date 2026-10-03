@@ -1,15 +1,17 @@
 import type { ColorRow, Fabric } from "@/lib/types";
 import { inr } from "@/lib/format";
+import { fabricImage } from "@/lib/images";
 
 export function FabricCard({ f, colors }: { f: Fabric; colors: ColorRow[] }) {
   const base = colors[0]?.hex ?? "#d8cfc0";
+  const img = fabricImage(f);
   return (
     <div className="glass-card hover-lift soft-in overflow-hidden rounded-2xl">
       <div
         className="aspect-[4/3]"
         style={
-          f.image_url
-            ? { backgroundImage: `url(${f.image_url})`, backgroundSize: "cover" }
+          img
+            ? { backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }
             : {
                 background: `repeating-linear-gradient(45deg, ${base}, ${base} 6px, color-mix(in oklch, ${base} 80%, white) 6px, color-mix(in oklch, ${base} 80%, white) 12px)`,
               }
