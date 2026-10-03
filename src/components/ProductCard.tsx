@@ -3,13 +3,15 @@ import { Heart, Package } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { inr } from "@/lib/format";
 import { DressPreview } from "./DressPreview";
+import { productImage } from "@/lib/images";
 
 const tones = ["#c9a7a0", "#8fa3b8", "#b89a6a", "#9bb09a", "#a58db5", "#c7b28c"];
 
 export function ProductVisual({ p, className = "" }: { p: Product; className?: string }) {
-  if (p.image_url)
+  const img = productImage(p);
+  if (img)
     return (
-      <img src={p.image_url} alt={p.name} loading="lazy" className={"h-full w-full object-cover " + className} />
+      <img src={img} alt={p.name} loading="lazy" className={"h-full w-full object-cover " + className} />
     );
   if (p.kind === "dress") {
     const tone = tones[p.name.length % tones.length];
