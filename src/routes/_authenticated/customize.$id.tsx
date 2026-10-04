@@ -9,6 +9,7 @@ import { MEASUREMENT_FIELDS } from "@/lib/types";
 import { bookingFee, inr } from "@/lib/format";
 import { placeDressOrder } from "@/lib/orders.functions";
 import { DressPreview } from "@/components/DressPreview";
+import { AiDressPreview } from "@/components/AiDressPreview";
 import { productImage } from "@/lib/images";
 import { SiteHeader } from "@/components/SiteHeader";
 import { BuyerFields, inputCls, type BuyerInfo } from "@/components/BuyerFields";
@@ -213,6 +214,12 @@ function Customize() {
                 ))}
               </div>
             </div>
+            <AiDressPreview details={{
+              dress: product.name, category: product.category ?? "dress", fabric: fabric?.name,
+              color: colors.find((c) => c.id === colorId)?.name, color2: colors.find((c) => c.id === color2)?.name,
+              pattern: pattern?.name, addons: chosenAddons.map((a) => a.name),
+              size: sizeMode === "std" ? size?.name : "custom tailored",
+            }} />
             <div className="glass-card rounded-2xl p-5">
               <h2 className="mb-2 text-2xl">Price</h2>
               {lines.map((l, i) => <div key={i} className="flex justify-between py-0.5 text-sm"><span>{l.label}</span><span>{inr(l.amount)}</span></div>)}
