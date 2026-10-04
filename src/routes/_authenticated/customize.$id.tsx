@@ -8,7 +8,6 @@ import { fetchAddons, fetchColors, fetchFabricColors, fetchFabrics, fetchPattern
 import { MEASUREMENT_FIELDS } from "@/lib/types";
 import { bookingFee, inr } from "@/lib/format";
 import { placeDressOrder } from "@/lib/orders.functions";
-import { DressPreview } from "@/components/DressPreview";
 import { AiDressPreview } from "@/components/AiDressPreview";
 import { productImage } from "@/lib/images";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -192,28 +191,6 @@ function Customize() {
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
-            <div className="glass-card rounded-2xl p-4">
-              <div className="relative h-96 overflow-hidden rounded-xl bg-secondary">
-                {view === "photo" && productImage(product) ? (
-                  <>
-                    <img src={productImage(product)!} alt={product.name} className="h-full w-full object-cover" />
-                    <div className="absolute inset-x-2 bottom-2 flex items-center gap-2 rounded-xl bg-background/85 px-3 py-2 text-xs backdrop-blur">
-                      <span className="h-4 w-4 rounded-full border" style={{ background: hex }} />
-                      {hex2 && <span className="h-4 w-4 rounded-full border" style={{ background: hex2 }} />}
-                      <span className="truncate">{fabric?.name} · {pattern?.name}{chosenAddons.length ? " · " + chosenAddons.map((a) => a.name).join(", ") : ""}</span>
-                    </div>
-                  </>
-                ) : (
-                  <DressPreview silhouette={product.silhouette} color={hex} secondary={hex2} patternKey={pattern?.style_key ?? "plain"} addons={chosenAddons.map((a) => a.name)} scale={scale} view={view === "back" ? "back" : "front"} />
-                )}
-                <span className="absolute right-3 top-2 rounded-full bg-background/85 px-2 py-0.5 text-xs">{sizeMode === "std" ? size?.name : "Custom fit"}</span>
-              </div>
-              <div className="mt-3 grid grid-cols-3 gap-1 text-xs">
-                {(["photo", "front", "back"] as const).map((v) => (
-                  <button key={v} onClick={() => setView(v)} className={"rounded-full py-2 uppercase tracking-widest transition " + (view === v ? "bg-primary text-primary-foreground" : "bg-secondary")}>{v === "photo" ? "Photo" : v + " design"}</button>
-                ))}
-              </div>
-            </div>
             <AiDressPreview details={{
               dress: product.name, category: product.category ?? "dress", fabric: fabric?.name,
               color: colors.find((c) => c.id === colorId)?.name, color2: colors.find((c) => c.id === color2)?.name,
