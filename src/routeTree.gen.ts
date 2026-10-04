@@ -20,6 +20,7 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as AuthenticatedCustomerRouteImport } from './routes/_authenticated/customer'
 import { Route as AuthenticatedDesignerRouteImport } from './routes/_authenticated/designer'
 import { Route as AuthenticatedOwnerRouteImport } from './routes/_authenticated/owner'
+import { Route as ApiDressPreviewRouteImport } from './routes/api/dress-preview'
 import { Route as AuthenticatedCustomerIndexRouteImport } from './routes/_authenticated/customer.index'
 import { Route as AuthenticatedCustomerHelpRouteImport } from './routes/_authenticated/customer.help'
 import { Route as AuthenticatedCustomerOrdersRouteImport } from './routes/_authenticated/customer.orders'
@@ -96,6 +97,11 @@ const AuthenticatedOwnerRoute = AuthenticatedOwnerRouteImport.update({
   id: '/owner',
   path: '/owner',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiDressPreviewRoute = ApiDressPreviewRouteImport.update({
+  id: '/api/dress-preview',
+  path: '/api/dress-preview',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedCustomerIndexRoute =
   AuthenticatedCustomerIndexRouteImport.update({
@@ -238,6 +244,7 @@ export interface FileRoutesByFullPath {
   '/customer': typeof AuthenticatedCustomerRouteWithChildren
   '/designer': typeof AuthenticatedDesignerRouteWithChildren
   '/owner': typeof AuthenticatedOwnerRouteWithChildren
+  '/api/dress-preview': typeof ApiDressPreviewRoute
   '/customer/help': typeof AuthenticatedCustomerHelpRoute
   '/customer/orders': typeof AuthenticatedCustomerOrdersRoute
   '/customer/profile': typeof AuthenticatedCustomerProfileRoute
@@ -269,6 +276,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/owner-login': typeof OwnerLoginRoute
   '/search': typeof SearchRoute
+  '/api/dress-preview': typeof ApiDressPreviewRoute
   '/customer/help': typeof AuthenticatedCustomerHelpRoute
   '/customer/orders': typeof AuthenticatedCustomerOrdersRoute
   '/customer/profile': typeof AuthenticatedCustomerProfileRoute
@@ -305,6 +313,7 @@ export interface FileRoutesById {
   '/_authenticated/customer': typeof AuthenticatedCustomerRouteWithChildren
   '/_authenticated/designer': typeof AuthenticatedDesignerRouteWithChildren
   '/_authenticated/owner': typeof AuthenticatedOwnerRouteWithChildren
+  '/api/dress-preview': typeof ApiDressPreviewRoute
   '/_authenticated/customer/help': typeof AuthenticatedCustomerHelpRoute
   '/_authenticated/customer/orders': typeof AuthenticatedCustomerOrdersRoute
   '/_authenticated/customer/profile': typeof AuthenticatedCustomerProfileRoute
@@ -341,6 +350,7 @@ export interface FileRouteTypes {
     | '/customer'
     | '/designer'
     | '/owner'
+    | '/api/dress-preview'
     | '/customer/help'
     | '/customer/orders'
     | '/customer/profile'
@@ -372,6 +382,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/owner-login'
     | '/search'
+    | '/api/dress-preview'
     | '/customer/help'
     | '/customer/orders'
     | '/customer/profile'
@@ -407,6 +418,7 @@ export interface FileRouteTypes {
     | '/_authenticated/customer'
     | '/_authenticated/designer'
     | '/_authenticated/owner'
+    | '/api/dress-preview'
     | '/_authenticated/customer/help'
     | '/_authenticated/customer/orders'
     | '/_authenticated/customer/profile'
@@ -440,6 +452,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OwnerLoginRoute: typeof OwnerLoginRoute
   SearchRoute: typeof SearchRoute
+  ApiDressPreviewRoute: typeof ApiDressPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -520,6 +533,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/owner'
       preLoaderRoute: typeof AuthenticatedOwnerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/dress-preview': {
+      id: '/api/dress-preview'
+      path: '/api/dress-preview'
+      fullPath: '/api/dress-preview'
+      preLoaderRoute: typeof ApiDressPreviewRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/customer/': {
       id: '/_authenticated/customer/'
@@ -777,6 +797,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OwnerLoginRoute: OwnerLoginRoute,
   SearchRoute: SearchRoute,
+  ApiDressPreviewRoute: ApiDressPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
